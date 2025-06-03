@@ -1,0 +1,195 @@
+/* ========================== */
+/*        CSS Variables       */
+/* ========================== */
+:root {
+  /* Цвета */
+  --clr-bg: #ffffff;
+  --clr-bg-alt: #f4f4f4;
+  --clr-text: #222222;
+  --clr-text-muted: #555555;
+  --clr-accent: #b93a1c; /* Оранжево-красный */
+  --clr-accent-dark: #f13000; /* Темнее для ховеров */
+  --clr-heading: #000000;
+  --clr-border: #e0e0e0;
+  --clr-bg-dark: #1a1a1a;
+  --clr-white: #ffffff;
+
+  /* Границы и тени */
+  --border-radius: 6px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Шрифты */
+  --font-main: "Inter", sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 14px;
+  --font-size-lg: 20px;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --fs-base: clamp(14px, 1.5vw, 16px);
+  --fs-lg: clamp(18px, 2vw, 20px);
+  --section-padding: clamp(10px, 3vw, 20px);
+
+  /* Размеры и отступы */
+  --max-width: 1000px;
+  --gap: 20px;
+  --gap-xs: 8px;
+  --gap-sm: 16px;
+  --gap-md: 24px;
+  --gap-lg: 32px;
+  --gap-xl: 48px;
+
+  /* Заголовки */
+  --fs-h1: 44px;
+  --fs-h2: 32px;
+  --fs-h3: 28px;
+  --fs-h4: 20px;
+
+  --clr-heading: #000000;
+  --clr-subheading: #2b2b2b;
+
+  /* Текст */
+  --fs-text-base: 16px;
+  --fs-text-sm: 14px;
+  --clr-text: #222222;
+  --clr-text-muted: #555555;
+
+  /* Переходы */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-slow: 0.4s ease;
+  --transition-bounce: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ...другие переменные... */
+  --btn-height: 48px;
+  --btn-padding: 5px 20px;
+  --btn-radius: 0px;
+  --btn-bg: var(--clr-accent);
+  --btn-bg-hover: rgb(255, 77, 0);
+  --btn-text-color: #ffffff;
+
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-modal: 100;
+  --z-fixed: 1000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* background-color: var(--clr-bg); */
+  color: var(--clr-text);
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ========================== */
+/*         Layout             */
+/* ========================== */
+
+/* Эта часть только для подложки! */
+/* .wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1440px;
+  height: 100%;
+  background: url("../img/content/layout.png") no-repeat top center;
+  background-size: 1000px auto;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
+} */
+
+/* ========================== */
+/*       Utility Classes      */
+/* ========================== */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--clr-heading);
+  font-weight: var(--font-weight-bold);
+}
+a {
+  color: var(--clr-accent);
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: black;
+}
+
+.text-center {
+  text-align: center;
+}
+.hidden {
+  display: none !important;
+}
+
+button,
+.btn {
+  display: inline-flex;
+  padding: var(--btn-padding);
+  height: var(--btn-height);
+  background-color: var(--btn-bg);
+  color: var(--btn-text-color);
+  font-size: var(--font-size-base);
+  font-family: var(--font-main);
+  font-weight: var(--font-weight-bold);
+  border: none;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(144, 0, 0, 0.5); /* 👈 тень по умолчанию */
+  transition: background-color var(--transition-fast),
+    transform var(--transition-fast), box-shadow var(--transition-fast);
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0); /* возвращается на место */
+  box-shadow: none; /* 👈 тень исчезает */
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 2px;
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--clr-accent);
+}
+.btn--outline:hover {
+  background-color: transparent;
+  color: var(--clr-text);
+}

@@ -1,0 +1,204 @@
+#quiz-start {
+  display: none;
+}
+#quiz-start.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+.quiz--full {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gap-xl) var(--gap);
+}
+
+.quiz-intro {
+  padding: var(--gap-xl) 0;
+  background-color: var(--clr-white);
+}
+
+.quiz-intro__container {
+  max-width: 100%;
+  padding: 0 var(--gap);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-lg);
+  flex-wrap: wrap;
+}
+
+.quiz-intro__content {
+  flex: 1 1 50%;
+}
+
+.quiz-intro__title {
+  font-size: var(--fs-h2);
+  line-height: 1.3;
+  margin-bottom: var(--gap-sm);
+}
+
+.quiz-intro__text {
+  font-size: var(--fs-base);
+  margin-bottom: var(--gap-sm);
+  color: var(--clr-text);
+}
+
+.quiz-intro__contacts {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: var(--gap-md);
+  font-size: var(--fs-base);
+  color: var(--clr-text-muted);
+}
+
+.quiz-intro__contacts li {
+  margin-bottom: var(--gap-xs);
+}
+
+.quiz-intro__image {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.quiz-intro__image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+/* Квиз вопросы: */
+
+.quiz {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: var(--gap-xl) var(--gap);
+}
+
+.quiz__progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.quiz__step {
+  display: none;
+  width: 100%;
+}
+
+.quiz__step.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz__question {
+  margin-bottom: 20px;
+}
+
+.quiz__inner {
+  max-width: 700px;
+  width: 100%;
+}
+
+.quiz__inner .btn {
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiz__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 700px;
+  margin: 20px auto;
+  width: 100%;
+}
+
+.quiz__option {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* ← вот это и задаёт расстояние между radio и текстом */
+  /* остальное по твоему коду */
+  padding: calc(5px * 3) calc(20px * 3);
+  background: var(--clr-bg-alt);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  font-size: var(--fs-base);
+  width: 100%;
+  color: var(--clr-text);
+}
+
+.quiz__option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--clr-border);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.quiz__option input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background: var(--clr-accent);
+  border-radius: 50%;
+}
+
+.quiz__option:hover {
+  background: var(--clr-accent);
+  color: var(--clr-white);
+}
+
+.quiz__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quiz__callback-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.quiz__callback-form input {
+  padding: 12px 16px;
+  font-size: var(--fs-base);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--border-radius);
+}

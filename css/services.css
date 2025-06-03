@@ -1,0 +1,91 @@
+.services {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.services__title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.services__subtitle {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: var(--clr-heading);
+}
+
+.services__text {
+  font-size: var(--fs-text-base);
+  color: var(--clr-text);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-indent: 2em;
+}
+
+.services__image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.services__cta {
+  margin: 32px 0;
+  text-align: right;
+}
+
+.services__image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 32px auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.about__list {
+  list-style: none;
+  padding-left: 1.5em;
+  margin-bottom: 24px;
+}
+
+.about__list li {
+  position: relative;
+  padding-left: 1em;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: var(--clr-text);
+}
+
+.about__list > li::before {
+  content: "●";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  color: black;
+  font-size: 0.8em;
+}
+
+.about__list li ul {
+  list-style-type: circle;
+  padding-left: 1.5em;
+  margin-top: 8px;
+}
+
+.about__list li ul li::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  color: black;
+  font-size: 0.8em;
+}
+
+.about__list li ul li {
+  position: relative;
+  padding-left: 1em;
+  margin-bottom: 8px;
+}
