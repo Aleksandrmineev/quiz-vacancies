@@ -20,36 +20,35 @@
 
   /* Шрифты */
   --font-main: "Inter", sans-serif;
-  --font-size-base: 16px;
+  --font-size-base: clamp(10px, 2vw, 16px);
   --font-size-sm: 14px;
   --font-size-lg: 20px;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
-  --fs-base: clamp(14px, 1.5vw, 16px);
+  --fs-base: clamp(12px, 1.5vw, 16px);
   --fs-lg: clamp(18px, 2vw, 20px);
-  --section-padding: clamp(10px, 3vw, 20px);
+  --section-padding: clamp(12px, 4vw, 48px);
 
   /* Размеры и отступы */
-  --max-width: 1000px;
-  --gap: 20px;
-  --gap-xs: 8px;
-  --gap-sm: 16px;
-  --gap-md: 24px;
-  --gap-lg: 32px;
-  --gap-xl: 48px;
+  --max-width: clamp(320px, 95vw, 1000px);
+  --gap: clamp(5px, 2vw, 20px);
+  --gap-sm: clamp(4px, 1.5vw, 16px);
+  --gap-md: clamp(6px, 2vw, 24px);
+  --gap-lg: clamp(8px, 3vw, 32px);
+  --gap-xl: clamp(12px, 4vw, 48px);
 
   /* Заголовки */
-  --fs-h1: 44px;
-  --fs-h2: 32px;
-  --fs-h3: 28px;
-  --fs-h4: 20px;
+  --fs-h1: clamp(20px, 4vw, 44px);
+  --fs-h2: clamp(18px, 3vw, 32px);
+  --fs-h3: clamp(16px, 2.5vw, 28px);
+  --fs-h4: clamp(12px, 2vw, 20px);
 
   --clr-heading: #000000;
   --clr-subheading: #2b2b2b;
 
   /* Текст */
-  --fs-text-base: 16px;
-  --fs-text-sm: 14px;
+  --fs-text-base: clamp(12px, 2vw, 16px);
+  --fs-text-sm: clamp(10px, 2vw, 14px);
   --clr-text: #222222;
   --clr-text-muted: #555555;
 
@@ -59,8 +58,8 @@
   --transition-bounce: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* ...другие переменные... */
-  --btn-height: 48px;
-  --btn-padding: 5px 20px;
+  --btn-height: clamp(40px, 6vw, 48px);
+  --btn-padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 20px);
   --btn-radius: 0px;
   --btn-bg: var(--clr-accent);
   --btn-bg-hover: rgb(255, 77, 0);
@@ -126,6 +125,23 @@ h3 {
   color: var(--clr-heading);
   font-weight: var(--font-weight-bold);
 }
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+h4 {
+  font-size: var(--fs-h4);
+}
+
 a {
   color: var(--clr-accent);
   transition: color var(--transition-fast);

@@ -1,13 +1,13 @@
 /* === Шапка === */
 .header {
-  padding: 20px 0;
+  padding: var(--gap) 0;
   /* background-color: var(--clr-white); */
   box-shadow: var(--box-shadow);
 }
 
 .header__grid {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: clamp(50px, 10vw, 180px) 1fr;
   align-items: center;
   gap: var(--gap);
 }
@@ -31,7 +31,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 50px;
+  font-size: clamp(20px, 3vw, 50px);
   font-weight: var(--font-weight-bold);
   color: var(--clr-heading);
 }
@@ -42,7 +42,7 @@
 }
 
 .header__phone {
-  font-size: 22px;
+  font-size: clamp(12px, 3vw, 20px);
   color: #bca99c;
 }
 /* НИЖНЯЯ СТРОКА */
@@ -51,11 +51,11 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--gap);
 }
 
 .header__subtitle {
-  font-size: 22px;
+  font-size: clamp(14px, 2vw, 22px);
   color: var(--clr-heading);
   margin: 0;
   font-weight: var(--font-weight-bold);
@@ -88,7 +88,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  gap: 30px;
+  gap: var(--gap);
 }
 
 .nav__list a {

@@ -15,7 +15,7 @@
 }
 
 .quiz-intro {
-  padding: var(--gap-xl) 0;
+  padding: var(--gap) 0;
   background-color: var(--clr-white);
 }
 
@@ -86,7 +86,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: var(--gap-md);
+  color: var(--clr-accent);
+  font-size: var(--fs-base);
 }
 
 .quiz__step {
@@ -102,6 +104,14 @@
 
 .quiz__question {
   margin-bottom: 20px;
+  text-align: center;
+  font-size: var(--fs-h3);
+}
+
+.quiz__final-form {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .quiz__inner {
@@ -119,10 +129,21 @@
 .quiz__form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 700px;
+  gap: var(--gap-md);
+  max-width: 70vh;
   margin: 20px auto;
   width: 100%;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .quiz__option {
@@ -201,4 +222,18 @@
   font-size: var(--fs-base);
   border: 1px solid var(--clr-border);
   border-radius: var(--border-radius);
+}
+
+.thankyou {
+  margin: 4vh 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
