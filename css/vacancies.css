@@ -245,8 +245,9 @@
 }
 
 .thankyou {
-  margin: 4vh 0;
+  margin: 4vh auto;
   opacity: 0;
+  text-align: center;
   transform: translateY(20px);
   animation: fadeUp 0.8s ease-out forwards;
 }
