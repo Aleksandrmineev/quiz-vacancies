@@ -25,7 +25,7 @@
   --font-size-lg: 20px;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
-  --fs-base: clamp(12px, 1.5vw, 16px);
+  --fs-base: clamp(14px, 1.5vw, 16px);
   --fs-lg: clamp(18px, 2vw, 20px);
   --section-padding: clamp(12px, 4vw, 48px);
 
