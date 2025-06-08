@@ -54,6 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     progressBar.style.width = percent + "%";
     progressText.textContent = percent + "%";
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // плавно скроллит вверх
+    });
   }
 
   // Следующий шаг
@@ -220,29 +224,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
   showStep(currentStep);
 
-  // Переход на страницу "Спасибо" после отправки формы
+  // Переход на страницу "Спасибо" после отправки формы + проверка и маска
   const callbackForm = document.querySelector(".quiz__callback-form");
 
   if (callbackForm) {
-    callbackForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+    const nameInput = callbackForm.querySelector("input[name='name']");
+    const phoneInput = callbackForm.querySelector("input[name='phone']");
+    const nameHint = callbackForm.querySelector(".form-hint--name");
+    const phoneHint = callbackForm.querySelector(".form-hint--phone");
 
-      const name = callbackForm
-        .querySelector("input[name='name']")
-        .value.trim();
-      const phone = callbackForm
-        .querySelector("input[name='phone']")
-        .value.trim();
+    // Маска телефона +7 XXX XXX XX XX
+    phoneInput.addEventListener("input", function () {
+      let x = phoneInput.value.replace(/\D/g, "");
 
-      if (!name || !phone) {
-        alert("Пожалуйста, заполните все поля");
-        return;
+      // Гарантируем, что начинается с 7
+      if (!x.startsWith("7")) {
+        x = "7" + x;
       }
 
-      // Здесь может быть отправка в Telegram
+      // Ограничим длину максимум 11 цифр
+      x = x.substring(0, 11);
 
-      // ✅ Перенаправление на страницу "Спасибо"
-      window.location.href = "thankyou.html";
+      let formatted = "+7";
+      if (x.length > 1) formatted += " " + x.substring(1, 4);
+      if (x.length >= 5) formatted += " " + x.substring(4, 7);
+      if (x.length >= 8) formatted += " " + x.substring(7, 9);
+      if (x.length >= 10) formatted += " " + x.substring(9, 11);
+
+      phoneInput.value = formatted;
+    });
+
+    callbackForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      const nameValue = nameInput.value.trim();
+      const phoneDigits = phoneInput.value.replace(/\D/g, "");
+
+      // Проверка имени (только кириллица, минимум 3 буквы)
+      const nameRegex = /^[А-ЯЁа-яё]{3,}(?:\s[А-ЯЁа-яё]{3,})?$/;
+      if (!nameRegex.test(nameValue)) {
+        nameHint.textContent =
+          "* Имя должно содержать минимум 3 буквы на русском языке";
+        nameHint.style.color = "red";
+        valid = false;
+      } else {
+        nameHint.textContent = "";
+        nameHint.style.color = "";
+      }
+
+      // Проверка телефона (+7 и 10 цифр)
+      if (phoneDigits.length !== 11 || !phoneDigits.startsWith("7")) {
+        phoneHint.textContent =
+          "* Введите номер в формате +7 XXX XXX XX XX (10 цифр после +7)";
+        phoneHint.style.color = "red";
+        valid = false;
+      } else {
+        phoneHint.textContent = "";
+        phoneHint.style.color = "";
+      }
+
+      if (valid) {
+        // ✅ Перенаправление на страницу "Спасибо"
+        window.location.href = "thankyou.html";
+      }
     });
   }
 });

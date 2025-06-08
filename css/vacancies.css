@@ -235,10 +235,10 @@
   border-radius: var(--border-radius);
 }
 
-.form-hint {
+.form-hint--name,
+.form-hint--phone {
   display: block;
   margin-bottom: 10px;
-  color: #c12d2d;
   font-size: 12px;
   line-height: 1.4;
   margin-left: 10px;

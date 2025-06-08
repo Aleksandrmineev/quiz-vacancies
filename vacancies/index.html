@@ -228,18 +228,14 @@
                   placeholder="Ваше имя"
                   required
                 />
-                <small class="form-hint">
-                  * Имя — от 3 символов на русском языке
-                </small>
+                <small class="form-hint--name"> </small>
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="Номер телефона"
+                  placeholder="+7 XXX XXX XX XX"
                   required
                 />
-                <small class="form-hint">
-                  * Номер телефона — формат РФ, минимум 11 цифр
-                </small>
+                <small class="form-hint--phone"> </small>
                 <button type="submit" class="btn">Отправить</button>
               </form>
             </div>
@@ -278,7 +274,7 @@
             </p>
           </div>
 
-          <div class="footer__col footer__links">
+          <div class="footer__col footer__links" style="display: none">
             <a href="#">Новости компании</a><br />
             <a href="#">Политика конфиденциальности</a>
           </div>
