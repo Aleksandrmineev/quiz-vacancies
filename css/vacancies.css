@@ -156,9 +156,9 @@
 .quiz__option {
   display: flex;
   align-items: center;
-  gap: 10px; /* ← вот это и задаёт расстояние между radio и текстом */
+  gap: var(--gap-lg); /* ← вот это и задаёт расстояние между radio и текстом */
   /* остальное по твоему коду */
-  padding: calc(5px * 3) calc(20px * 3);
+  padding: calc(5px * 3) calc(5px * 3);
   background: var(--clr-bg-alt);
   border: 1px solid var(--clr-border);
   border-radius: var(--border-radius);

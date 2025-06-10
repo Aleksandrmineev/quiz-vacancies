@@ -36,11 +36,29 @@ document.addEventListener("DOMContentLoaded", function () {
   const progressText = document.querySelector(".quiz__progress-value");
 
   let currentStep = 0;
-  // const totalSteps = steps.length;
   const totalSteps = 3;
+
   function showStep(index) {
-    steps.forEach((step, i) => {
-      step.classList.toggle("active", i === index);
+    let currentStepNumber = index + 1;
+
+    steps.forEach((step) => {
+      const stepNum = step.getAttribute("data-step");
+
+      if (currentStepNumber === 3) {
+        // Специальная логика для шага 3
+        if (document.body.classList.contains("show-form")) {
+          step.classList.toggle("active", stepNum === "3-alt");
+        } else {
+          step.classList.toggle("active", stepNum === "3");
+        }
+      } else {
+        // Обычная логика для шагов 1, 2 и 4
+        step.classList.toggle(
+          "active",
+          stepNum == currentStepNumber.toString()
+        );
+      }
+
       const prevBtn = step.querySelector(".quiz__prev");
       if (prevBtn) {
         prevBtn.disabled = index === 0;
@@ -54,10 +72,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     progressBar.style.width = percent + "%";
     progressText.textContent = percent + "%";
+
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // плавно скроллит вверх
+      behavior: "smooth",
     });
+  }
+
+  function toggleThirdStep() {
+    const showForm = document.body.classList.contains("show-form");
+
+    const thirdStep = document.querySelector('.quiz__step[data-step="3"]');
+    const thirdStepAlt = document.querySelector(
+      '.quiz__step[data-step="3-alt"]'
+    );
+
+    if (showForm) {
+      thirdStep?.classList.add("hidden");
+      thirdStepAlt?.classList.remove("hidden");
+    } else {
+      thirdStep?.classList.remove("hidden");
+      thirdStepAlt?.classList.add("hidden");
+    }
   }
 
   // Следующий шаг
@@ -74,42 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (currentStep < totalSteps - 1) {
         currentStep++;
 
-        // Автоматический переход при выборе варианта
-        steps.forEach((step, stepIndex) => {
-          const radios = step.querySelectorAll("input[type='radio']");
-          radios.forEach((radio) => {
-            radio.addEventListener("change", () => {
-              setTimeout(() => {
-                if (stepIndex < totalSteps - 1) {
-                  currentStep = stepIndex + 1;
-                  showStep(currentStep);
-                } else {
-                  steps[stepIndex].classList.remove("active");
-
-                  const tgBlock = document.querySelector(
-                    "#quiz-final-telegram"
-                  );
-                  const formBlock = document.querySelector("#quiz-final-form");
-                  const showForm =
-                    document.body.classList.contains("show-form");
-
-                  if (showForm) {
-                    formBlock?.classList.add("active");
-                    formBlock?.style.setProperty("display", "flex");
-                    tgBlock?.classList.remove("active");
-                    tgBlock?.style.setProperty("display", "none");
-                  } else {
-                    tgBlock?.classList.add("active");
-                    tgBlock?.style.setProperty("display", "flex");
-                    formBlock?.classList.remove("active");
-                    formBlock?.style.setProperty("display", "none");
-                  }
-                }
-              }, 150);
-            });
-          });
-        });
-
         showStep(currentStep);
       } else {
         // Финальный шаг — показать нужный блок
@@ -120,23 +120,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const showForm = document.body.classList.contains("show-form");
 
         if (showForm) {
-          if (formBlock) {
-            formBlock.style.display = "flex";
-            formBlock.classList.add("active");
-          }
-          if (tgBlock) {
-            tgBlock.style.display = "none";
-            tgBlock.classList.remove("active");
-          }
+          formBlock?.classList.add("active");
+          formBlock?.style.setProperty("display", "flex");
+          tgBlock?.classList.remove("active");
+          tgBlock?.style.setProperty("display", "none");
         } else {
-          if (tgBlock) {
-            tgBlock.style.display = "flex";
-            tgBlock.classList.add("active");
-          }
-          if (formBlock) {
-            formBlock.style.display = "none";
-            formBlock.classList.remove("active");
-          }
+          tgBlock?.classList.add("active");
+          tgBlock?.style.setProperty("display", "flex");
+          formBlock?.classList.remove("active");
+          formBlock?.style.setProperty("display", "none");
         }
       }
     });
@@ -147,43 +139,6 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", () => {
       if (currentStep > 0) {
         currentStep--;
-
-        // Автоматический переход при выборе варианта
-        steps.forEach((step, stepIndex) => {
-          const radios = step.querySelectorAll("input[type='radio']");
-          radios.forEach((radio) => {
-            radio.addEventListener("change", () => {
-              setTimeout(() => {
-                if (stepIndex < totalSteps - 1) {
-                  currentStep = stepIndex + 1;
-                  showStep(currentStep);
-                } else {
-                  steps[stepIndex].classList.remove("active");
-
-                  const tgBlock = document.querySelector(
-                    "#quiz-final-telegram"
-                  );
-                  const formBlock = document.querySelector("#quiz-final-form");
-                  const showForm =
-                    document.body.classList.contains("show-form");
-
-                  if (showForm) {
-                    formBlock?.classList.add("active");
-                    formBlock?.style.setProperty("display", "flex");
-                    tgBlock?.classList.remove("active");
-                    tgBlock?.style.setProperty("display", "none");
-                  } else {
-                    tgBlock?.classList.add("active");
-                    tgBlock?.style.setProperty("display", "flex");
-                    formBlock?.classList.remove("active");
-                    formBlock?.style.setProperty("display", "none");
-                  }
-                }
-              }, 150);
-            });
-          });
-        });
-
         showStep(currentStep);
       }
     });
@@ -233,16 +188,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const nameHint = callbackForm.querySelector(".form-hint--name");
     const phoneHint = callbackForm.querySelector(".form-hint--phone");
 
-    // Маска телефона +7 XXX XXX XX XX
     phoneInput.addEventListener("input", function () {
       let x = phoneInput.value.replace(/\D/g, "");
 
-      // Гарантируем, что начинается с 7
       if (!x.startsWith("7")) {
         x = "7" + x;
       }
 
-      // Ограничим длину максимум 11 цифр
       x = x.substring(0, 11);
 
       let formatted = "+7";
@@ -261,7 +213,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const nameValue = nameInput.value.trim();
       const phoneDigits = phoneInput.value.replace(/\D/g, "");
 
-      // Проверка имени (только кириллица, минимум 3 буквы)
       const nameRegex = /^[А-ЯЁа-яё]{3,}(?:\s[А-ЯЁа-яё]{3,})?$/;
       if (!nameRegex.test(nameValue)) {
         nameHint.textContent =
@@ -273,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
         nameHint.style.color = "";
       }
 
-      // Проверка телефона (+7 и 10 цифр)
       if (phoneDigits.length !== 11 || !phoneDigits.startsWith("7")) {
         phoneHint.textContent =
           "* Введите номер в формате +7 XXX XXX XX XX (10 цифр после +7)";
@@ -285,7 +235,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (valid) {
-        // ✅ Перенаправление на страницу "Спасибо"
         window.location.href = "thankyou.html";
       }
     });
