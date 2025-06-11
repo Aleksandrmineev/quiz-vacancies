@@ -137,7 +137,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--gap-md);
-  max-width: 70vh;
+  max-width: 80vw;
   margin: 20px auto;
   width: 100%;
 
